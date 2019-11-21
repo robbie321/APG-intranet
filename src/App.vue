@@ -8,32 +8,15 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-xs-only">
-        <!-- <v-btn
-          text
-          flat
-          v-for="item in menuItems"
-          :key="item.title"
-          router
-          :to="item.link"
-          style
-        >{{item.title}}</v-btn>
-        <v-btn to="/" flat v-if="userIsAuthenticated" @click="onLogout">
-          <v-icon left>exit_to_app</v-icon>Logout
-        </v-btn>-->
-
-        <v-menu offset-y open-on-click open-on-hover v-for="item in menuItems" :key="item.title">
+        <v-menu offset-y open-on-click open-on-hover v-for="(item,index) in menuItems" :key="index">
           <template v-slot:activator="{ on }">
             <v-btn text color="primary" v-on="on">{{item.title}}</v-btn>
           </template>
-          <v-btn></v-btn>
-          <v-list v-for="(item,index) in menuItems[index].subItems" :key="index">
-            <v-list-item>
-              <v-list-item-title :to="item.link">{{item.title}}</v-list-item-title>
-            </v-list-item>
 
-            <!-- <v-list-item router :to="item.link">
-              <v-list-item-title>{{ item[index].children.title }}</v-list-item-title>
-            </v-list-item>-->
+          <v-list v-for="(item,index) in menuItems[index].subItems" :key="index">
+            <v-list-item :to="item.link">
+              <v-list-item-title>{{item.title}}</v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </v-toolbar-items>
@@ -46,13 +29,6 @@ export default {
   // name: 'App',
   data() {
     return {
-      items: [
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me 2" }
-      ],
-
       sideNav: false
     };
   },
