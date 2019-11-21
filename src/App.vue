@@ -25,7 +25,8 @@
           <template v-slot:activator="{ on }">
             <v-btn text color="primary" v-on="on">{{item.title}}</v-btn>
           </template>
-          <v-list v-for="(item,index) in menuItems[3].subItems" :key="index">
+          <v-btn></v-btn>
+          <v-list v-for="(item,index) in menuItems[index].subItems" :key="index">
             <v-list-item>
               <v-list-item-title :to="item.link">{{item.title}}</v-list-item-title>
             </v-list-item>
