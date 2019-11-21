@@ -1,36 +1,42 @@
 <template>
   <div>
-    <v-containe>
-      <v-toolbar>
-        <v-toolbar-title>
-          <v-img src="./assets/apg.png"></v-img>
-        </v-toolbar-title>
+    <v-toolbar>
+      <v-toolbar-title data-app>
+        <v-img src="./assets/apg.png"></v-img>
+      </v-toolbar-title>
 
-        <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-        <v-toolbar-items class="hidden-xs-only">
-          <v-btn flat v-for="item in menuItems" :key="item.title" router :to="item.link" style>
-            <!-- <v-icon left>{{item.icon}}</v-icon> -->
-            {{item.title}}
-          </v-btn>
-          <v-btn to="/" flat v-if="userIsAuthenticated" @click="onLogout">
-            <v-icon left>exit_to_app</v-icon>Logout
-          </v-btn>
-        </v-toolbar-items>
+      <v-toolbar-items class="hidden-xs-only">
+        <!-- <v-btn
+          text
+          flat
+          v-for="item in menuItems"
+          :key="item.title"
+          router
+          :to="item.link"
+          style
+        >{{item.title}}</v-btn>
+        <v-btn to="/" flat v-if="userIsAuthenticated" @click="onLogout">
+          <v-icon left>exit_to_app</v-icon>Logout
+        </v-btn>-->
 
-        <template v-if="$vuetify.breakpoint.smAndUp">
-          <v-btn icon>
-            <v-icon>mdi-export-variant</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-delete-circle</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-plus-circle</v-icon>
-          </v-btn>
-        </template>
-      </v-toolbar>
-    </v-containe>
+        <v-menu offset-y open-on-click open-on-hover v-for="item in menuItems" :key="item.title">
+          <template v-slot:activator="{ on }">
+            <v-btn text color="primary" v-on="on">{{item.title}}</v-btn>
+          </template>
+          <v-list v-for="(item,index) in menuItems[3].subItems" :key="index">
+            <v-list-item>
+              <v-list-item-title :to="item.link">{{item.title}}</v-list-item-title>
+            </v-list-item>
+
+            <!-- <v-list-item router :to="item.link">
+              <v-list-item-title>{{ item[index].children.title }}</v-list-item-title>
+            </v-list-item>-->
+          </v-list>
+        </v-menu>
+      </v-toolbar-items>
+    </v-toolbar>
   </div>
 </template>
 
@@ -39,15 +45,68 @@ export default {
   // name: 'App',
   data() {
     return {
+      items: [
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me 2" }
+      ],
+
       sideNav: false
     };
   },
   computed: {
     menuItems() {
       let menuItems = [
-        { title: "sign in", link: "/signin" },
-        { title: "sign up", link: "/signup" }
+        {
+          title: "Admin",
+          subItems: [
+            { title: "Admin", link: "/admin" },
+            { title: "APG & Co Team", link: "APGTeam" },
+            { title: "APG Values", link: "/Values" },
+            { title: "APG Corp Video", link: "/videos" }
+          ],
+          link: "/signin"
+        },
+        {
+          title: "Product",
+          subItems: [
+            { title: "Sportscraft Team", link: "/SCTeam" },
+            { title: "SABA Team", link: "/SBTeam" },
+            { title: "Strategy Connect", link: "/StrategyConnect" }
+          ],
+          link: "/Product"
+        },
+        {
+          title: "JAG",
+          subItems: [{ title: "JAG Team", link: "/JAGTeam" }],
+          link: "/JAG"
+        },
+        {
+          title: "HR",
+          subItems: [
+            { title: "APG Values", link: "/Values" },
+            { title: "HR Team", link: "/HRTeam" },
+            { title: "Lets Talk Performance", link: "/performace" },
+            { title: "Org Charts", link: "/orgCharts" },
+            { title: "Policies & Procedures", link: "/policies" },
+            { title: "WHS", link: "/WHS" },
+            { title: "HR Forms", link: "/HR/Forms" },
+            { title: "WHS Forms", link: "/WHS/Forms" },
+            { title: "Strategy Connect", link: "/StrategyConnect" }
+          ],
+          link: "/HR"
+        },
+        { title: "Supply Chain", link: "/SupplyChain" },
+        { title: "Finance", link: "/Finance" },
+        { title: "IT", link: "/IT" },
+        { title: "Private Label", link: "/PrivateLabel" },
+        { title: "Shanghai/Vietnam", link: "/ShanghaiVietnam" },
+        { title: "Qlikview", link: "/Qlikview" },
+        { title: "Applications", link: "/Application" },
+        { title: "APG Learning", link: "/APGLearning" }
       ];
+
       if (this.userIsAuthenticated) {
         menuItems = [
           { icon: "home", title: "how it works", link: "/" },
@@ -77,6 +136,9 @@ export default {
   methods: {
     onLogout() {
       this.$store.dispatch("logout");
+    },
+    test() {
+      print("This worked");
     }
   }
 };
