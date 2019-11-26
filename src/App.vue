@@ -1,14 +1,22 @@
 <template>
   <div>
-    <v-toolbar>
+    <v-toolbar app flat>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-toolbar-side-icon>
       <v-toolbar-title data-app>
         <v-img src="./assets/apg.png"></v-img>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-toolbar-items class="hidden-xs-only">
-        <v-menu offset-y open-on-click open-on-hover v-for="(item,index) in menuItems" :key="index">
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-menu
+          class="hidden-md-and-up"
+          offset-y
+          open-on-click
+          open-on-hover
+          v-for="(item,index) in menuItems"
+          :key="index"
+        >
           <template v-slot:activator="{ on }">
             <v-btn text color="primary" v-on="on">{{item.title}}</v-btn>
           </template>
@@ -74,9 +82,57 @@ export default {
           ],
           link: "/HR"
         },
-        { title: "Supply Chain", link: "/SupplyChain" },
-        { title: "Finance", link: "/Finance" },
-        { title: "IT", link: "/IT" },
+        {
+          title: "Supply Chain",
+          subItems: [
+            { title: "Supply Chain Team", link: "/SCT" },
+            { title: "Global Sourcing", link: "/GlobalSourcing" },
+            { title: "CP Calendar/Process", link: "/CP" },
+            { title: "Quality Assurance", link: "/QA" },
+            { title: "Logistics", link: "/logistics" },
+            { title: "Digital Operations", link: "/DO" },
+            { title: "Monthly Updates", link: "/updates" },
+            { title: "Strategy Connect", link: "/StrategyConnect" }
+          ],
+          link: "/SupplyChain"
+        },
+        {
+          title: "Finance",
+          subItems: [
+            { title: "Finance team", link: "/teams/finance" },
+            { title: "Policies and Procedures", link: "/policies/finance" },
+            { title: "Finance Forms", link: "/forms/finance" },
+            { title: "Costing Sheets", link: "/finance/sheets" },
+            { title: "Strategy Connect", link: "/StrategyConnect" }
+          ],
+          link: "/Finance"
+        },
+        {
+          title: "IT",
+          subItems: [
+            { title: "The Team", link: "/teams/finance" },
+            { title: "Change Form", link: "/policies/finance" },
+            { title: "New User Form (HR Only)", link: "/forms/IT/New_User" },
+            { title: "Terminated User Form", link: "/forms/IT/terminate_User" },
+            { title: "Policies and Procedures", link: "/policies/IT" },
+            { title: "Servicedesk", link: "/IT/Service_Desk" },
+            { title: "IT Training Manuals", link: "/IT/Manual" },
+            {
+              title: "SSPR (Self-Service Password Reset)",
+              link: "/IT/password_reset"
+            },
+            { title: "POS Monitor", link: "/IT/POS_monitor" },
+            { title: "CONC Monitor", link: "/IT/CONS_monitor" },
+            { title: "Willow Monitor", link: "/IT/willow_monitor" },
+            {
+              title: "Applications",
+              link: "/IT?apps"
+            },
+            { title: "Strategy Connect", link: "/StrategyConnect" },
+            { title: "Store Number Requisition", link: "/IT/store_number" }
+          ],
+          link: "/IT"
+        },
         { title: "Private Label", link: "/PrivateLabel" },
         { title: "Shanghai/Vietnam", link: "/ShanghaiVietnam" },
         { title: "Qlikview", link: "/Qlikview" },
