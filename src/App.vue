@@ -29,6 +29,10 @@
         </v-menu>
       </v-toolbar-items>
     </v-toolbar>
+
+    <v-content>
+      <router-view></router-view>
+    </v-content>
   </div>
 </template>
 
