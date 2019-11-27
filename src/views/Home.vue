@@ -4,23 +4,18 @@
       <v-layout row wrap>
         <v-flex xs12 sm4 @click="clickMethod(home)">
           <v-card color="rgb(0, 0, 0, 0.0)">
-            <!-- <h1 class="image-text">SPORTSCRAFT</h1> -->
             <v-img class="home-image" :src="require('./../assets/logo-main-m.png')"></v-img>
           </v-card>
         </v-flex>
 
         <v-flex xs12 sm4 @click="clickMethod(programs)">
           <v-card color="rgb(0, 0, 0, 0.0)">
-            <!-- <h1 class="image-text">SABA</h1> -->
-
             <v-img class="home-image" :src="require('./../assets/logo-main-saba.png')"></v-img>
           </v-card>
         </v-flex>
         <v-flex xs12 sm4 @click="clickMethod(about)">
           <v-card>
-            <!-- <h1 class="image-text">JAG</h1> -->
             <v-img class="home-image" :src="require('./../assets/logo-main-jag.png')"></v-img>
-            <!-- <img class="home-image" src="./../assets/jasonwater.png"> -->
           </v-card>
         </v-flex>
       </v-layout>
